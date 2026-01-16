@@ -4,8 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 export interface WeatherData {
   current: {
     temperature_2m: number;
+    apparent_temperature: number;
     weather_code: number;
     is_day: number;
+    wind_speed_10m: number;
+    relative_humidity_2m: number;
   };
   daily: {
     time: string[];
@@ -35,7 +38,7 @@ export function useWeather(lat: number | null, lon: number | null) {
       if (lat === null || lon === null) throw new Error("Location not provided");
       
       const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,weather_code,is_day,wind_speed_10m,relative_humidity_2m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`
       );
       
       if (!res.ok) throw new Error("Failed to fetch weather data");

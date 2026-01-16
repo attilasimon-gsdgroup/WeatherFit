@@ -31,7 +31,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
         </h2>
         <p className="text-slate-800 dark:text-white/90 font-medium mb-6 drop-shadow-sm">{description}</p>
 
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex items-center justify-center mb-2">
           <WeatherIcon 
             code={current.weather_code} 
             isDay={current.is_day} 
@@ -41,6 +41,10 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
             {Math.round(current.temperature_2m)}°
           </span>
         </div>
+
+        <p className="text-sm font-medium mb-6 opacity-80">
+          Feels like {Math.round(current.apparent_temperature)}°
+        </p>
 
         <div className="glass-panel rounded-2xl p-4 w-full mb-6">
           <p className="text-lg font-medium leading-relaxed">
@@ -65,8 +69,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
             <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <Wind className="w-3 h-3 mr-1" /> Wind
             </div>
-            {/* Open-Meteo current doesn't explicitly return wind in our query, just showing placeholder for UI completeness */}
-            <span className="font-bold text-lg">12<span className="text-xs font-normal ml-1">km/h</span></span>
+            <span className="font-bold text-lg">{Math.round(current.wind_speed_10m)}<span className="text-xs font-normal ml-1">km/h</span></span>
           </div>
         </div>
       </div>
