@@ -117,8 +117,8 @@ export default function Home() {
             
             <SavedLocations 
               currentLocationName={location.name}
-              currentLat={location.lat}
-              currentLon={location.lon}
+              currentLat={location.lat || 0}
+              currentLon={location.lon || 0}
               onSelect={(lat, lon, name) => setLocation({ lat, lon, name })}
             />
           </div>
