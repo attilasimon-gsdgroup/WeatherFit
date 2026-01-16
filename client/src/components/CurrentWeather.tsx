@@ -20,7 +20,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   if ([51, 61, 80, 95].some(code => current.weather_code >= code)) gradientClass = "weather-gradient-rainy";
 
   return (
-    <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-white p-6 md:p-8 transition-all duration-500`}>
+    <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500`}>
       {/* Decorative blurred circles */}
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/20 rounded-full blur-3xl" />
       <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-black/10 rounded-full blur-3xl" />
@@ -29,7 +29,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
         <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-1 drop-shadow-md">
           {locationName}
         </h2>
-        <p className="text-white/90 font-medium mb-6 drop-shadow-sm">{description}</p>
+        <p className="text-slate-800 dark:text-white/90 font-medium mb-6 drop-shadow-sm">{description}</p>
 
         <div className="flex items-center justify-center mb-6">
           <WeatherIcon 
@@ -49,20 +49,20 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
         </div>
 
         <div className="grid grid-cols-3 w-full gap-4">
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
-            <div className="flex items-center text-white/90 text-sm mb-1">
+          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
+            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <ArrowUp className="w-3 h-3 mr-1" /> Max
             </div>
             <span className="font-bold text-lg">{Math.round(today.temperature_2m_max[0])}°</span>
           </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
-            <div className="flex items-center text-white/90 text-sm mb-1">
+          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
+            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <ArrowDown className="w-3 h-3 mr-1" /> Min
             </div>
             <span className="font-bold text-lg">{Math.round(today.temperature_2m_min[0])}°</span>
           </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
-            <div className="flex items-center text-white/90 text-sm mb-1">
+          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
+            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <Wind className="w-3 h-3 mr-1" /> Wind
             </div>
             {/* Open-Meteo current doesn't explicitly return wind in our query, just showing placeholder for UI completeness */}
