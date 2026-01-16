@@ -1,8 +1,6 @@
 import { format } from "date-fns";
-import { ArrowUp, ArrowDown, Droplets, Wind, Sun, Umbrella, Bell } from "lucide-react";
+import { ArrowUp, ArrowDown, Droplets, Wind, Sun, Umbrella } from "lucide-react";
 import { WeatherIcon } from "./WeatherIcon";
-import { Button } from "./ui/button";
-import { useToast } from "@/hooks/use-toast";
 import { type WeatherData, getWeatherDescription, getOutfitRecommendation } from "@/hooks/use-weather";
 
 interface CurrentWeatherProps {
@@ -11,7 +9,6 @@ interface CurrentWeatherProps {
 }
 
 export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
-  const { toast } = useToast();
   const current = data.current;
   const today = data.daily;
   const description = getWeatherDescription(current.weather_code);
@@ -35,35 +32,6 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   if (current.weather_code <= 2 && current.is_day) gradientClass = "weather-gradient-sunny";
   if ([51, 61, 80, 95].some(code => current.weather_code >= code)) gradientClass = "weather-gradient-rainy";
 
-  const handleEnableNotifications = async () => {
-    if (!('Notification' in window)) {
-      toast({
-        title: "Not supported",
-        description: "Your browser does not support notifications.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
-      toast({
-        title: "Notifications enabled",
-        description: `You will now receive alerts for ${locationName}.`
-      });
-      
-      // Simulate an alert check
-      if (current.weather_code >= 80) {
-        setTimeout(() => {
-          new Notification("Weather Alert", {
-            body: `Heavy weather detected in ${locationName}: ${description}`,
-            icon: "/icon-192x192.png"
-          });
-        }, 3000);
-      }
-    }
-  };
-
   return (
     <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500 min-h-[400px] flex items-center justify-center`}>
       {/* Decorative blurred circles */}
@@ -71,20 +39,9 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
       <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-black/10 rounded-full blur-3xl" />
 
       <div className="relative z-10 flex flex-col items-center text-center w-full">
-        <div className="flex items-center justify-center gap-2 mb-1">
-          <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight drop-shadow-md">
-            {locationName}
-          </h2>
-          <Button 
-            size="icon" 
-            variant="ghost" 
-            className="h-8 w-8 rounded-full bg-white/20 hover:bg-white/40 border border-white/20"
-            onClick={handleEnableNotifications}
-            title="Enable alerts"
-          >
-            <Bell className="h-4 w-4" />
-          </Button>
-        </div>
+        <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-1 drop-shadow-md">
+          {locationName}
+        </h2>
         <p className="text-xs uppercase tracking-widest font-bold opacity-70 mb-2">
           {format(localTime, "EEEE, HH:mm")} {data.timezone_abbreviation}
         </p>
