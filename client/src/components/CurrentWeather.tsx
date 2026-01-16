@@ -33,13 +33,10 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   if ([51, 61, 80, 95].some(code => current.weather_code >= code)) gradientClass = "weather-gradient-rainy";
 
   return (
-    <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-white p-6 md:p-8 transition-all duration-500 min-h-[450px] flex items-center justify-center`}>
-      {/* Location Background with Wash */}
-      <div 
-        className="location-bg-image"
-        style={{ backgroundImage: `url(https://source.unsplash.com/featured/?${encodeURIComponent(locationName)},landscape,nature)` }}
-      />
-      <div className="location-bg-wash" />
+    <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500 min-h-[400px] flex items-center justify-center`}>
+      {/* Decorative blurred circles */}
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-black/10 rounded-full blur-3xl" />
 
       <div className="relative z-10 flex flex-col items-center text-center w-full">
         <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-1 drop-shadow-md">
@@ -48,7 +45,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
         <p className="text-xs uppercase tracking-widest font-bold opacity-70 mb-2">
           {format(localTime, "EEEE, HH:mm")} {data.timezone_abbreviation}
         </p>
-        <p className="text-white/90 font-medium mb-6 drop-shadow-sm">{description}</p>
+        <p className="text-slate-800 dark:text-white/90 font-medium mb-6 drop-shadow-sm">{description}</p>
 
         <div className="flex items-center justify-center mb-2">
           <WeatherIcon 
@@ -72,29 +69,29 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 w-full gap-4">
-          <div className="bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-xl p-3 flex flex-col items-center border border-white/20">
-            <div className="flex items-center text-white text-sm mb-1">
+          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
+            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <Sun className="w-3 h-3 mr-1" /> UV Index
             </div>
-            <span className="font-bold text-lg text-white">{Math.round(today.uv_index_max[0])}</span>
+            <span className="font-bold text-lg">{Math.round(today.uv_index_max[0])}</span>
           </div>
-          <div className="bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-xl p-3 flex flex-col items-center border border-white/20">
-            <div className="flex items-center text-white text-sm mb-1">
+          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
+            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <Umbrella className="w-3 h-3 mr-1" /> Rain
             </div>
-            <span className="font-bold text-lg text-white">{today.precipitation_probability_max[0]}%</span>
+            <span className="font-bold text-lg">{today.precipitation_probability_max[0]}%</span>
           </div>
-          <div className="bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-xl p-3 flex flex-col items-center border border-white/20">
-            <div className="flex items-center text-white text-sm mb-1">
+          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
+            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <Wind className="w-3 h-3 mr-1" /> Wind
             </div>
-            <span className="font-bold text-lg text-white">{Math.round(current.wind_speed_10m)}<span className="text-xs font-normal ml-1">km/h</span></span>
+            <span className="font-bold text-lg">{Math.round(current.wind_speed_10m)}<span className="text-xs font-normal ml-1">km/h</span></span>
           </div>
-          <div className="bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-xl p-3 flex flex-col items-center border border-white/20">
-            <div className="flex items-center text-white text-sm mb-1">
+          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
+            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <Droplets className="w-3 h-3 mr-1" /> Humidity
             </div>
-            <span className="font-bold text-lg text-white">{current.relative_humidity_2m}%</span>
+            <span className="font-bold text-lg">{current.relative_humidity_2m}%</span>
           </div>
         </div>
       </div>

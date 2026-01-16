@@ -110,11 +110,3 @@
 .weather-gradient-cloudy {
   @apply bg-gradient-to-br from-blue-200 via-slate-300 to-slate-400 dark:from-slate-900 dark:via-slate-950 dark:to-blue-950;
 }
-
-/* Location background styling */
-.location-bg-image {
-  @apply absolute inset-0 bg-cover bg-center transition-opacity duration-1000;
-}
-.location-bg-wash {
-  @apply absolute inset-0 bg-black/40 backdrop-blur-[2px];
-}
