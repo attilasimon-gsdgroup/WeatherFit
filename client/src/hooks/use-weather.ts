@@ -107,23 +107,33 @@ export const getOutfitRecommendation = (code: number, temp: number): string => {
   // Snow codes
   const snowCodes = [71, 73, 75, 77, 85, 86];
 
-  let outfit = "";
+  let recommendation = "";
 
-  if (temp > 25) {
-    outfit = "T-shirt + shorts + sunglasses ☀️";
+  // Base layers based on temperature
+  if (temp > 28) {
+    recommendation = "Ultra-light breathable T-shirt, linen shorts, and open sandals 🩴. Stay hydrated! ☀️";
+  } else if (temp > 22) {
+    recommendation = "Light cotton T-shirt, comfortable shorts or chinos, and breathable sneakers 👟. Sunglasses recommended! 😎";
   } else if (temp >= 15) {
-    outfit = "Jeans + light jacket 👕";
-  } else if (temp >= 5) {
-    outfit = "Warm coat + sweater 🧥";
+    recommendation = "Layer up: A light base layer with a cotton sweater or cardigan. Wear comfortable trousers and closed-toe shoes 👞.";
+  } else if (temp >= 8) {
+    recommendation = "Three layers: A moisture-wicking base, a warm mid-layer (fleece or wool), and a windproof light jacket 🧥. Pair with sturdy boots 🥾.";
+  } else if (temp >= 0) {
+    recommendation = "Heavy layers: Thermal base layer, thick wool sweater, and a windproof insulated coat. Wear warm socks and insulated boots 👢.";
   } else {
-    outfit = "Heavy coat + scarf + gloves 🧣";
+    recommendation = "Extreme cold: Thermal underwear, multiple warm layers, and a heavy down parka. Don't forget a hat, gloves, and thick wool socks 🧣.";
   }
 
+  // Adjustments for precipitation
   if (rainCodes.includes(code)) {
-    outfit += " + umbrella ☔";
+    if (temp > 15) {
+      recommendation = "Light waterproof shell or poncho over breathable clothes. Avoid heavy fabrics that soak. Sturdy water-resistant sneakers 👟 and an umbrella ☔.";
+    } else {
+      recommendation = "Full waterproof outer layer (hardshell jacket and pants). Insulated waterproof boots are a must to stay dry and warm 🌧️. Umbrella ☔.";
+    }
   } else if (snowCodes.includes(code)) {
-    outfit = "Winter gear + waterproof boots ❄️";
+    recommendation = "Winter expedition gear: Waterproof and windproof outer shell, insulated snow boots with good grip, and thermal layers. Stay dry to stay warm! ❄️";
   }
 
-  return outfit;
+  return recommendation;
 };
