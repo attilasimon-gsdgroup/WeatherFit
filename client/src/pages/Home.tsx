@@ -4,6 +4,7 @@ import { useWeather } from "@/hooks/use-weather";
 import { CitySearch } from "@/components/CitySearch";
 import { CurrentWeather } from "@/components/CurrentWeather";
 import { Forecast } from "@/components/Forecast";
+import { HourlyForecast } from "@/components/HourlyForecast";
 import { SavedLocations } from "@/components/SavedLocations";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -112,6 +113,8 @@ export default function Home() {
         ) : weather ? (
           <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500 fade-in">
             <CurrentWeather data={weather} locationName={location.name} />
+            
+            <HourlyForecast data={weather} />
             
             <Forecast data={weather} />
             

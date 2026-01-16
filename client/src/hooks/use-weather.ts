@@ -18,6 +18,12 @@ export interface WeatherData {
     uv_index_max: number[];
     precipitation_probability_max: number[];
   };
+  hourly: {
+    time: string[];
+    temperature_2m: number[];
+    weather_code: number[];
+    precipitation_probability: number[];
+  };
   current_units: {
     temperature_2m: string;
   };
@@ -40,7 +46,7 @@ export function useWeather(lat: number | null, lon: number | null) {
       if (lat === null || lon === null) throw new Error("Location not provided");
       
       const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,weather_code,is_day,wind_speed_10m,relative_humidity_2m&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,precipitation_probability_max&timezone=auto`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,weather_code,is_day,wind_speed_10m,relative_humidity_2m&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,precipitation_probability_max&hourly=temperature_2m,weather_code,precipitation_probability&forecast_hours=24&timezone=auto`
       );
       
       if (!res.ok) throw new Error("Failed to fetch weather data");
