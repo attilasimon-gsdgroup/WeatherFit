@@ -15,8 +15,16 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   const uvIndex = today.uv_index_max[0];
   const outfit = getOutfitRecommendation(current.weather_code, current.temperature_2m, uvIndex);
   
-  // Use location-based time
-  const localTime = current.time ? new Date(current.time) : new Date();
+  // Calculate correct local time using UTC offset
+  const getLocalTime = () => {
+    const now = new Date();
+    // Get UTC time in milliseconds
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    // Add Open-Meteo offset (seconds to milliseconds)
+    return new Date(utc + (data.utc_offset_seconds * 1000));
+  };
+  
+  const localTime = getLocalTime();
   
   // Determine gradient based on weather code
   // Simple logic: Day/Clear = sunny, Night/Cloud = cloudy, Rain = rainy
@@ -28,6 +36,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
     <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500 min-h-[400px] flex items-center justify-center`}>
       {/* Dynamic Background Overlays */}
       <div className="absolute inset-0 pointer-events-none">
+        <div className="cloud-overlay" />
         {current.weather_code >= 51 && Array.from({ length: 20 }).map((_, i) => (
           <div 
             key={i} 

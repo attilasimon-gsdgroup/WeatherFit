@@ -111,6 +111,16 @@
   @apply bg-gradient-to-br from-blue-200 via-slate-300 to-slate-400 dark:from-slate-900 dark:via-slate-950 dark:to-blue-950;
 }
 
+@keyframes cloud {
+  0% { transform: translateX(-10%) translateY(0); opacity: 0.3; }
+  50% { transform: translateX(10%) translateY(5px); opacity: 0.5; }
+  100% { transform: translateX(-10%) translateY(0); opacity: 0.3; }
+}
+.cloud-overlay {
+  @apply absolute top-0 left-0 w-[200%] h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.2)_0%,transparent_50%)] pointer-events-none;
+  animation: cloud 20s ease-in-out infinite;
+}
+
 /* Animated Weather Elements */
 @keyframes rain {
   from { transform: translateY(-20vh); }
