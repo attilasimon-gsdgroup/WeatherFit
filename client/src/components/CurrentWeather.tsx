@@ -1,4 +1,4 @@
-import { ArrowUp, ArrowDown, Droplets, Wind } from "lucide-react";
+import { ArrowUp, ArrowDown, Droplets, Wind, Sun, Umbrella } from "lucide-react";
 import { WeatherIcon } from "./WeatherIcon";
 import { type WeatherData, getWeatherDescription, getOutfitRecommendation } from "@/hooks/use-weather";
 
@@ -11,7 +11,8 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   const current = data.current;
   const today = data.daily;
   const description = getWeatherDescription(current.weather_code);
-  const outfit = getOutfitRecommendation(current.weather_code, current.temperature_2m);
+  const uvIndex = today.uv_index_max[0];
+  const outfit = getOutfitRecommendation(current.weather_code, current.temperature_2m, uvIndex);
   
   // Determine gradient based on weather code
   // Simple logic: Day/Clear = sunny, Night/Cloud = cloudy, Rain = rainy
@@ -52,24 +53,30 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 w-full gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 w-full gap-4">
           <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
             <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
-              <ArrowUp className="w-3 h-3 mr-1" /> Max
+              <Sun className="w-3 h-3 mr-1" /> UV Index
             </div>
-            <span className="font-bold text-lg">{Math.round(today.temperature_2m_max[0])}°</span>
+            <span className="font-bold text-lg">{Math.round(today.uv_index_max[0])}</span>
           </div>
           <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
             <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
-              <ArrowDown className="w-3 h-3 mr-1" /> Min
+              <Umbrella className="w-3 h-3 mr-1" /> Rain
             </div>
-            <span className="font-bold text-lg">{Math.round(today.temperature_2m_min[0])}°</span>
+            <span className="font-bold text-lg">{today.precipitation_probability_max[0]}%</span>
           </div>
           <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
             <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
               <Wind className="w-3 h-3 mr-1" /> Wind
             </div>
             <span className="font-bold text-lg">{Math.round(current.wind_speed_10m)}<span className="text-xs font-normal ml-1">km/h</span></span>
+          </div>
+          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
+            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
+              <Droplets className="w-3 h-3 mr-1" /> Humidity
+            </div>
+            <span className="font-bold text-lg">{current.relative_humidity_2m}%</span>
           </div>
         </div>
       </div>

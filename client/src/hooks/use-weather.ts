@@ -15,6 +15,8 @@ export interface WeatherData {
     weather_code: number[];
     temperature_2m_max: number[];
     temperature_2m_min: number[];
+    uv_index_max: number[];
+    precipitation_probability_max: number[];
   };
   current_units: {
     temperature_2m: string;
@@ -38,7 +40,7 @@ export function useWeather(lat: number | null, lon: number | null) {
       if (lat === null || lon === null) throw new Error("Location not provided");
       
       const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,weather_code,is_day,wind_speed_10m,relative_humidity_2m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,weather_code,is_day,wind_speed_10m,relative_humidity_2m&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,precipitation_probability_max&timezone=auto`
       );
       
       if (!res.ok) throw new Error("Failed to fetch weather data");
@@ -104,7 +106,7 @@ export const getWeatherDescription = (code: number): string => {
   return codes[code] || "Unknown";
 };
 
-export const getOutfitRecommendation = (code: number, temp: number): string => {
+export const getOutfitRecommendation = (code: number, temp: number, uv: number = 0): string => {
   // Rain codes
   const rainCodes = [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99];
   // Snow codes
@@ -114,9 +116,9 @@ export const getOutfitRecommendation = (code: number, temp: number): string => {
 
   // Base layers based on temperature
   if (temp > 28) {
-    recommendation = "Ultra-light breathable T-shirt, linen shorts, and open sandals 🩴. Stay hydrated! ☀️";
+    recommendation = "Ultra-light breathable T-shirt, linen shorts, and open sandals 🩴.";
   } else if (temp > 22) {
-    recommendation = "Light cotton T-shirt, comfortable shorts or chinos, and breathable sneakers 👟. Sunglasses recommended! 😎";
+    recommendation = "Light cotton T-shirt, comfortable shorts or chinos, and breathable sneakers 👟.";
   } else if (temp >= 15) {
     recommendation = "Layer up: A light base layer with a cotton sweater or cardigan. Wear comfortable trousers and closed-toe shoes 👞.";
   } else if (temp >= 8) {
@@ -125,6 +127,13 @@ export const getOutfitRecommendation = (code: number, temp: number): string => {
     recommendation = "Heavy layers: Thermal base layer, thick wool sweater, and a windproof insulated coat. Wear warm socks and insulated boots 👢.";
   } else {
     recommendation = "Extreme cold: Thermal underwear, multiple warm layers, and a heavy down parka. Don't forget a hat, gloves, and thick wool socks 🧣.";
+  }
+
+  // UV protection advice
+  if (uv >= 6) {
+    recommendation += " ☀️ High UV: Apply SPF 50+, wear a wide-brimmed hat and polarized sunglasses.";
+  } else if (uv >= 3) {
+    recommendation += " 😎 Moderate UV: Sunscreen and sunglasses recommended.";
   }
 
   // Adjustments for precipitation
