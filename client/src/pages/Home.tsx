@@ -5,6 +5,7 @@ import { CitySearch } from "@/components/CitySearch";
 import { CurrentWeather } from "@/components/CurrentWeather";
 import { Forecast } from "@/components/Forecast";
 import { SavedLocations } from "@/components/SavedLocations";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface LocationState {
   lat: number | null;
@@ -70,6 +71,7 @@ export default function Home() {
                 BETA
               </span>
             </h1>
+            <ThemeToggle />
           </div>
           <CitySearch 
             onSelect={(city) => setLocation({ lat: city.latitude, lon: city.longitude, name: city.name })}
