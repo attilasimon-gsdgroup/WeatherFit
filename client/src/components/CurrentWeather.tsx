@@ -15,6 +15,9 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   const uvIndex = today.uv_index_max[0];
   const outfit = getOutfitRecommendation(current.weather_code, current.temperature_2m, uvIndex);
   
+  // Use location-based time
+  const localTime = current.time ? new Date(current.time) : new Date();
+  
   // Determine gradient based on weather code
   // Simple logic: Day/Clear = sunny, Night/Cloud = cloudy, Rain = rainy
   let gradientClass = "weather-gradient-cloudy";
@@ -59,7 +62,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
           {locationName}
         </h2>
         <p className="text-xs uppercase tracking-widest font-bold opacity-70 mb-2">
-          {format(new Date(), "EEEE, HH:mm")}
+          {format(localTime, "EEEE, HH:mm")} {data.timezone_abbreviation}
         </p>
         <p className="text-slate-800 dark:text-white/90 font-medium mb-6 drop-shadow-sm">{description}</p>
 

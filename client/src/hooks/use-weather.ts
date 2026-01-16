@@ -9,7 +9,11 @@ export interface WeatherData {
     is_day: number;
     wind_speed_10m: number;
     relative_humidity_2m: number;
+    time: string;
   };
+  timezone: string;
+  timezone_abbreviation: string;
+  utc_offset_seconds: number;
   daily: {
     time: string[];
     weather_code: number[];

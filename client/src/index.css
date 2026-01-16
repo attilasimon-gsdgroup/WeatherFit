@@ -113,19 +113,21 @@
 
 /* Animated Weather Elements */
 @keyframes rain {
-  from { transform: translateY(-100vh); }
-  to { transform: translateY(100vh); }
+  from { transform: translateY(-20vh); }
+  to { transform: translateY(120vh); }
 }
 .rain-drop {
-  @apply absolute w-[2px] h-[20px] bg-white/40;
+  @apply absolute w-[3px] h-[30px] bg-white/60;
   animation: rain linear infinite;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
 }
 
 @keyframes snow {
-  0% { transform: translateY(-10px) translateX(0); }
-  100% { transform: translateY(100vh) translateX(20px); }
+  0% { transform: translateY(-20vh) translateX(0) rotate(0deg); }
+  100% { transform: translateY(120vh) translateX(40px) rotate(360deg); }
 }
 .snow-flake {
-  @apply absolute w-1 h-1 bg-white rounded-full;
+  @apply absolute w-2 h-2 bg-white rounded-full;
   animation: snow linear infinite;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
