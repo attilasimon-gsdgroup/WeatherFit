@@ -100,13 +100,32 @@
   @apply bg-white/70 dark:bg-black/40 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl;
 }
 
-/* Weather card gradients */
+/* Weather card gradients - Enhanced for better visibility */
 .weather-gradient-sunny {
-  @apply bg-gradient-to-br from-blue-400 via-blue-300 to-yellow-200 dark:from-blue-900 dark:via-blue-800 dark:to-yellow-900;
+  @apply bg-gradient-to-br from-sky-400 via-blue-300 to-amber-200 dark:from-blue-900 dark:via-indigo-950 dark:to-sky-900 shadow-[0_0_40px_-10px_rgba(251,191,36,0.3)];
 }
 .weather-gradient-rainy {
-  @apply bg-gradient-to-br from-slate-400 to-slate-600 dark:from-slate-700 dark:to-slate-900;
+  @apply bg-gradient-to-br from-slate-400 via-slate-500 to-slate-700 dark:from-slate-800 dark:via-slate-900 dark:to-black;
 }
 .weather-gradient-cloudy {
-  @apply bg-gradient-to-br from-blue-100 to-slate-200 dark:from-slate-800 dark:to-slate-900;
+  @apply bg-gradient-to-br from-blue-200 via-slate-300 to-slate-400 dark:from-slate-900 dark:via-slate-950 dark:to-blue-950;
+}
+
+/* Animated Weather Elements */
+@keyframes rain {
+  from { transform: translateY(-100vh); }
+  to { transform: translateY(100vh); }
+}
+.rain-drop {
+  @apply absolute w-[2px] h-[20px] bg-white/40;
+  animation: rain linear infinite;
+}
+
+@keyframes snow {
+  0% { transform: translateY(-10px) translateX(0); }
+  100% { transform: translateY(100vh) translateX(20px); }
+}
+.snow-flake {
+  @apply absolute w-1 h-1 bg-white rounded-full;
+  animation: snow linear infinite;
 }

@@ -22,15 +22,32 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   if ([51, 61, 80, 95].some(code => current.weather_code >= code)) gradientClass = "weather-gradient-rainy";
 
   return (
-    <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500`}>
+    <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500 min-h-[400px] flex items-center justify-center`}>
       {/* Dynamic Background Overlays */}
-      <div className="absolute inset-0 opacity-50 dark:opacity-30">
-        {current.weather_code >= 51 && (
-          <div className="absolute inset-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/rain.png')] bg-repeat" />
-        )}
-        {current.weather_code >= 71 && current.weather_code <= 77 && (
-          <div className="absolute inset-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/snow.png')] bg-repeat" />
-        )}
+      <div className="absolute inset-0 pointer-events-none">
+        {current.weather_code >= 51 && Array.from({ length: 20 }).map((_, i) => (
+          <div 
+            key={i} 
+            className="rain-drop" 
+            style={{ 
+              left: `${Math.random() * 100}%`, 
+              animationDuration: `${0.5 + Math.random()}s`,
+              animationDelay: `${Math.random() * 2}s`
+            }} 
+          />
+        ))}
+        {current.weather_code >= 71 && current.weather_code <= 77 && Array.from({ length: 30 }).map((_, i) => (
+          <div 
+            key={i} 
+            className="snow-flake" 
+            style={{ 
+              left: `${Math.random() * 100}%`, 
+              animationDuration: `${3 + Math.random() * 2}s`,
+              animationDelay: `${Math.random() * 5}s`,
+              opacity: Math.random()
+            }} 
+          />
+        ))}
       </div>
 
       {/* Decorative blurred circles */}
