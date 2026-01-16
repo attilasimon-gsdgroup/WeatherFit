@@ -33,30 +33,32 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
   if ([51, 61, 80, 95].some(code => current.weather_code >= code)) gradientClass = "weather-gradient-rainy";
 
   return (
-    <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500 min-h-[400px] flex items-center justify-center`}>
+    <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500 min-h-[450px] flex items-center justify-center`}>
       {/* Dynamic Background Overlays */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <div className="cloud-overlay" />
-        {current.weather_code >= 51 && Array.from({ length: 20 }).map((_, i) => (
+        {current.weather_code >= 51 && Array.from({ length: 25 }).map((_, i) => (
           <div 
             key={i} 
             className="rain-drop" 
             style={{ 
               left: `${Math.random() * 100}%`, 
-              animationDuration: `${0.5 + Math.random()}s`,
+              top: `-${Math.random() * 50}%`,
+              animationDuration: `${0.6 + Math.random() * 0.4}s`,
               animationDelay: `${Math.random() * 2}s`
             }} 
           />
         ))}
-        {current.weather_code >= 71 && current.weather_code <= 77 && Array.from({ length: 30 }).map((_, i) => (
+        {current.weather_code >= 71 && current.weather_code <= 77 && Array.from({ length: 35 }).map((_, i) => (
           <div 
             key={i} 
             className="snow-flake" 
             style={{ 
               left: `${Math.random() * 100}%`, 
+              top: `-${Math.random() * 50}%`,
               animationDuration: `${3 + Math.random() * 2}s`,
               animationDelay: `${Math.random() * 5}s`,
-              opacity: Math.random()
+              opacity: 0.8 + Math.random() * 0.2
             }} 
           />
         ))}
