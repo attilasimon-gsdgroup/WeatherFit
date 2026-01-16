@@ -51,7 +51,7 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
           <WeatherIcon 
             code={current.weather_code} 
             isDay={current.is_day} 
-            className="w-24 h-24 md:w-32 md:h-32 drop-shadow-lg filter" 
+            className="w-24 h-24 md:w-32 md:h-32 drop-shadow-[0_4px_6px_rgba(0,0,0,0.3)] filter brightness-90 dark:brightness-100" 
           />
           <span className="text-7xl md:text-9xl font-bold font-display ml-4 drop-shadow-xl tracking-tighter">
             {Math.round(current.temperature_2m)}°
@@ -69,29 +69,29 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 w-full gap-4">
-          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
-            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
-              <Sun className="w-3 h-3 mr-1" /> UV Index
+          <div className="bg-white/40 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center border border-black/5 dark:border-white/10">
+            <div className="flex items-center text-slate-900 dark:text-white/90 text-sm font-bold mb-1">
+              <Sun className="w-3 h-3 mr-1 stroke-[3px]" /> UV Index
             </div>
-            <span className="font-bold text-lg">{Math.round(today.uv_index_max[0])}</span>
+            <span className="font-extrabold text-lg">{Math.round(today.uv_index_max[0])}</span>
           </div>
-          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
-            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
-              <Umbrella className="w-3 h-3 mr-1" /> Rain
+          <div className="bg-white/40 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center border border-black/5 dark:border-white/10">
+            <div className="flex items-center text-slate-900 dark:text-white/90 text-sm font-bold mb-1">
+              <Umbrella className="w-3 h-3 mr-1 stroke-[3px]" /> Rain
             </div>
-            <span className="font-bold text-lg">{today.precipitation_probability_max[0]}%</span>
+            <span className="font-extrabold text-lg">{today.precipitation_probability_max[0]}%</span>
           </div>
-          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
-            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
-              <Wind className="w-3 h-3 mr-1" /> Wind
+          <div className="bg-white/40 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center border border-black/5 dark:border-white/10">
+            <div className="flex items-center text-slate-900 dark:text-white/90 text-sm font-bold mb-1">
+              <Wind className="w-3 h-3 mr-1 stroke-[3px]" /> Wind
             </div>
-            <span className="font-bold text-lg">{Math.round(current.wind_speed_10m)}<span className="text-xs font-normal ml-1">km/h</span></span>
+            <span className="font-extrabold text-lg">{Math.round(current.wind_speed_10m)}<span className="text-xs font-normal ml-1">km/h</span></span>
           </div>
-          <div className="bg-white/30 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center">
-            <div className="flex items-center text-slate-800 dark:text-white/90 text-sm mb-1">
-              <Droplets className="w-3 h-3 mr-1" /> Humidity
+          <div className="bg-white/40 dark:bg-white/20 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center border border-black/5 dark:border-white/10">
+            <div className="flex items-center text-slate-900 dark:text-white/90 text-sm font-bold mb-1">
+              <Droplets className="w-3 h-3 mr-1 stroke-[3px]" /> Humidity
             </div>
-            <span className="font-bold text-lg">{current.relative_humidity_2m}%</span>
+            <span className="font-extrabold text-lg">{current.relative_humidity_2m}%</span>
           </div>
         </div>
       </div>
