@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { ArrowUp, ArrowDown, Droplets, Wind, Sun, Umbrella } from "lucide-react";
 import { WeatherIcon } from "./WeatherIcon";
 import { type WeatherData, getWeatherDescription, getOutfitRecommendation } from "@/hooks/use-weather";
@@ -22,6 +23,16 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
 
   return (
     <div className={`relative overflow-hidden rounded-3xl shadow-2xl ${gradientClass} text-slate-900 dark:text-white p-6 md:p-8 transition-all duration-500`}>
+      {/* Dynamic Background Overlays */}
+      <div className="absolute inset-0 opacity-50 dark:opacity-30">
+        {current.weather_code >= 51 && (
+          <div className="absolute inset-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/rain.png')] bg-repeat" />
+        )}
+        {current.weather_code >= 71 && current.weather_code <= 77 && (
+          <div className="absolute inset-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/snow.png')] bg-repeat" />
+        )}
+      </div>
+
       {/* Decorative blurred circles */}
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/20 rounded-full blur-3xl" />
       <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-black/10 rounded-full blur-3xl" />
@@ -30,6 +41,9 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
         <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight mb-1 drop-shadow-md">
           {locationName}
         </h2>
+        <p className="text-xs uppercase tracking-widest font-bold opacity-70 mb-2">
+          {format(new Date(), "EEEE, HH:mm")}
+        </p>
         <p className="text-slate-800 dark:text-white/90 font-medium mb-6 drop-shadow-sm">{description}</p>
 
         <div className="flex items-center justify-center mb-2">
