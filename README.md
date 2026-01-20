@@ -4,7 +4,9 @@ WeatherFit is a clean, modern, and minimalist weather application designed to pr
 
 ## Project Context & Origin
 
-This project began with a vision for a mobile-first, user-centric weather tool that eliminates the guesswork from daily dressing. The initial conceptualization and the core prompt—defining the app's scope, design philosophy (modern minimalist PWA), and its key functionality (integrating weather data with an intelligent outfit recommendation engine)—were developed in collaboration with **Grok**.
+This project was born during the **GSD AI Hackathon** as an unplanned and unprepared sudden participation. The core experiment was to see if a functional application could be developed using **Replit** as an AI development tool entirely on an **iPhone**.
+
+The initial spark—including the app's concept, the first prompt text, and the decision to target a modern minimalist weather experience—came from **Grok**. Everything from that point forward, including the entire codebase, UI implementation, data logic, and even this documentation, was executed and refined by **Replit**.
 
 The goal was to create an app that automatically detects location, fetches real-time data from the Open-Meteo API (requiring no API keys), and presents it through a responsive, high-contrast interface optimized for mobile experiences.
 
